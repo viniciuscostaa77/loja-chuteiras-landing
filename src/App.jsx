@@ -3,7 +3,6 @@ import Hero from './components/Hero.jsx'
 import ActionLinks from './components/ActionLinks.jsx'
 import TrustBadges from './components/TrustBadges.jsx'
 import VideoTestimonials from './components/VideoTestimonials.jsx'
-import InstagramPreview from './components/InstagramPreview.jsx'
 import Footer from './components/Footer.jsx'
 
 export default function App() {
@@ -15,7 +14,6 @@ export default function App() {
         <ActionLinks />
         <TrustBadges />
         <VideoTestimonials />
-        <InstagramPreview />
       </main>
       <Footer />
     </div>
