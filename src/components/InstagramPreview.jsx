@@ -1,6 +1,5 @@
 import loja from '../config/loja.js'
 
-// Substitua as URLs abaixo pelas fotos reais dos últimos posts do Instagram.
 const posts = [
   'public/foto-footer3.jpg',
   'https://images.unsplash.com/photo-1552346154-21d32810aba3?auto=format&fit=crop&w=300&q=80',
