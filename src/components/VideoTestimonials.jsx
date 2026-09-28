@@ -7,11 +7,7 @@ const videos = [
     src: '/depoimento-1.mp4',
     poster: '',
   },
-  {
-    label: 'Depoimento 2',
-    src: '/depoimento-2.mp4',
-    poster: '',
-  },
+
 ]
 
 export default function VideoTestimonials() {
