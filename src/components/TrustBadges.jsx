@@ -28,7 +28,7 @@ export default function TrustBadges() {
         <p className="text-xs font-semibold uppercase tracking-wide text-flame-500">
           {loja.nome} pelo mundo 
         </p>
-        <p className="mt-2 text-lg font-bold text-paper-50 sm:text-xl">
+        <p className="mt-2 font-display text-2xl uppercase text-paper-50 sm:text-3xl">
           Do Brasil para novos destinos.
         </p>
         <p className="mt-1 text-sm text-mist-400">
@@ -50,7 +50,7 @@ export default function TrustBadges() {
               alt={`Bandeira de ${country.name}`}
               className="h-9 w-14 rounded object-cover shadow-sm"
             />
-            <p className="text-sm font-bold text-paper-50">{country.name}</p>
+            <p className="font-display text-base uppercase text-paper-50">{country.name}</p>
             <p className="text-xs text-mist-400">{country.region}</p>
           </div>
         ))}

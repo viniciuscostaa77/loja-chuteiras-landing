@@ -27,8 +27,8 @@ export default {
         },
       },
       fontFamily: {
-        display: ['"Inter"', 'system-ui', 'sans-serif'],
-        body: ['"Inter"', 'system-ui', 'sans-serif'],
+      display: ['"Anton"', '"Arial Narrow"', 'sans-serif'],
+      body: ['"Inter"', 'system-ui', 'sans-serif'],
       },
       borderRadius: {
         xl2: '0.75rem',

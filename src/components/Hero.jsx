@@ -31,7 +31,7 @@ export default function Hero() {
         <div className="grid grid-cols-2 grid-rows-2 gap-2 sm:gap-3">
           <div className="relative row-span-2 overflow-hidden rounded-lg border border-ink-700">
             <img
-              src="public/foto-jogadores2.jpeg"
+              src="/foto-jogadores2.jpeg"
               alt="Chuteira em destaque"
               className="h-full w-full object-cover"
             />
@@ -40,12 +40,12 @@ export default function Hero() {
             </span>
           </div>
           <img
-            src="public/foto-jogadores3.jpeg"
+            src="/foto-jogadores3.jpeg"
             alt="Chuteira em campo"
             className="aspect-square w-full rounded-lg border border-ink-700 object-cover"
           />
           <img
-            src="public/foto-jogadores.jpeg"
+            src="/foto-jogadores.jpeg"
             alt="Detalhe de sneaker"
             className="aspect-square w-full rounded-lg border border-ink-700 object-cover"
           />
