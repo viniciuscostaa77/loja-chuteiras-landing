@@ -1,55 +1,33 @@
+import loja from '../config/loja.js'
+
 export default function Hero() {
   return (
-    <section className="container-px pb-6 sm:pb-8">
-      <div className="grid grid-cols-1 items-center gap-8 lg:grid-cols-2 lg:gap-10">
-        <div>
-          <p className="mb-4 inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-wide text-flame-500">
-            <span className="h-px w-4 bg-flame-500" aria-hidden="true" />
-            Sneakers &amp; chuteiras
-          </p>
-
-          <h1 className="font-display text-4xl font-extrabold uppercase leading-[1.02] text-paper-50 sm:text-5xl lg:text-6xl">
-            Seu estilo.
-            <br />
-            Seu jogo.
-            <br />
-            <span className="text-flame-500">
-              Seu próximo
-              <br />
-              par.
-            </span>
-          </h1>
-
-          <p className="mt-5 max-w-sm text-sm leading-relaxed text-mist-400 sm:text-base">
-            Da rua ao campo, encontre o seu par.
-            <br />
-            Escolha por onde começar.
+    <section className="container-px py-16 sm:py-24 lg:py-28">
+      <div className="mx-auto max-w-2xl text-center">
+        <div className="flex items-center justify-center gap-2.5">
+          
+          <p className="font-display text-4xl font-extrabold uppercase tracking-tight text-flame-450 sm:text-5xl">
+            {loja.nome}
           </p>
         </div>
+        <p className="mt-1 text-xs font-semibold uppercase tracking-[0.2em] text-mist-400 sm:text-sm">
+          
+        </p>
 
-        {/* As 3 fotos juntas, num só grupo */}
-        <div className="grid grid-cols-2 grid-rows-2 gap-2 sm:gap-3">
-          <div className="relative row-span-2 overflow-hidden rounded-lg border border-ink-700">
-            <img
-              src="/foto-jogadores2.jpeg"
-              alt="Chuteira em destaque"
-              className="h-full w-full object-cover"
-            />
-            <span className="absolute left-2 top-2 bg-ink-950 px-2 py-1 text-[9px] font-bold uppercase tracking-wide text-paper-50 sm:px-2.5 sm:py-1.5 sm:text-[10px]">
-              Da rua ao campo.
-            </span>
-          </div>
-          <img
-            src="/foto-jogadores3.jpeg"
-            alt="Chuteira em campo"
-            className="aspect-square w-full rounded-lg border border-ink-700 object-cover"
-          />
-          <img
-            src="/foto-jogadores.jpeg"
-            alt="Detalhe de sneaker"
-            className="aspect-square w-full rounded-lg border border-ink-700 object-cover"
-          />
-        </div>
+        <h1 className="mt-6 whitespace-nowrap font-display text-[clamp(3rem,13vw,7rem)] font-extrabold uppercase leading-[0.95] tracking-tight text-paper-50">
+          Seu estilo.
+          <br />
+          Seu jogo.
+          <br />
+          <span className="text-flame-450">Seu próximo par.</span>
+        </h1>
+
+        <p className="mx-auto mt-6 max-w-sm text-sm leading-relaxed text-mist-400 sm:text-base">
+          Os melhores sneakers e chuteiras selecionadas para quem leva
+          estilo e performace a serio.
+          <br />
+          
+        </p>
       </div>
     </section>
   )

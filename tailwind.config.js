@@ -22,6 +22,7 @@ export default {
         },
         flame: {
           400: '#FF8A4D',
+          450: '#FF6B1A',
           500: '#FF6B1A',
           600: '#E85A0C',
         },
