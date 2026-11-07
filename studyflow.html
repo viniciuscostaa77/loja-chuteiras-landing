@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>StudyFlow – Seu estudo. Seu ritmo. Seu progresso.</title>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f4f6f8;--card:#fff;--ink:#1f2b3a;--mut:#5b6b7d;--navy:#2d3b4e;--teal:#00c9a7;--teald:#008f77;--coral:#ff7f66;--yel:#ffc65c;--line:#e2e8ee;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#141c26;--card:#1d2835;--ink:#eef2f6;--mut:#9fb0c1;--line:#2b394a;--teald:#00c9a7}}
+:root[data-theme="dark"]{--bg:#141c26;--card:#1d2835;--ink:#eef2f6;--mut:#9fb0c1;--line:#2b394a;--teald:#00c9a7}
+html{scroll-behavior:smooth;scroll-padding-top:70px}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.6 Inter,system-ui,sans-serif}
+h1,h2,h3{font-family:Orbitron,Inter,sans-serif;line-height:1.15;margin:0 0 .5em}
+h2{font-size:clamp(1.5rem,4vw,2.2rem);color:var(--teald)}
+.wrap{max-width:1080px;margin:auto;padding:0 20px}
+section{padding:64px 0}
+nav{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:var(--navy);color:#fff}
+nav .wrap{display:flex;align-items:center;justify-content:space-between;height:58px;gap:12px}
+.logo{font:900 1.1rem Orbitron,sans-serif;color:var(--teal);text-decoration:none}
+nav ul{display:flex;gap:18px;list-style:none;margin:0;padding:0;overflow-x:auto}
+nav a{color:#dbe4ee;text-decoration:none;font-size:.9rem;white-space:nowrap}
+nav a:hover{color:var(--teal)}
+.tbtn{background:none;border:1px solid #5b6b7d;color:#fff;border-radius:8px;padding:4px 9px;cursor:pointer}
+@media(max-width:760px){nav ul{display:none}}
+.hero{background:var(--navy);color:#fff;padding:70px 0 80px;position:relative;overflow:hidden}
+.hero .wrap{display:grid;grid-template-columns:1.2fr .8fr;gap:30px;align-items:center}
+.hero small{letter-spacing:.2em;color:var(--coral);font-size:.75rem}
+.hero h1{font-size:clamp(2.6rem,9vw,5rem);color:var(--teal);margin:.2em 0}
+.hero p{font-size:1.15rem;color:#cdd8e4;max-width:460px}
+.tag{display:inline-block;background:var(--coral);color:var(--navy);padding:3px 10px;font-weight:700;font-family:Orbitron;font-size:.8rem}
+.btn{display:inline-block;background:var(--teal);color:#0b2b26;font-weight:700;border:0;border-radius:12px;padding:12px 22px;text-decoration:none;cursor:pointer;font:700 1rem Inter;margin:6px 8px 0 0}
+.btn.alt{background:transparent;border:2px solid var(--coral);color:#fff}
+.btn.sm{padding:8px 14px;font-size:.9rem;margin:0}
+.robot{width:100%;max-width:320px;margin:auto;animation:fl 4s ease-in-out infinite}
+@keyframes fl{50%{transform:translateY(-12px)}}
+@media(max-width:760px){.hero .wrap{grid-template-columns:1fr;text-align:center}.hero p{margin:auto}.robot{max-width:200px}}
+.grid{display:grid;gap:16px;grid-template-columns:repeat(auto-fit,minmax(220px,1fr))}
+.card{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:20px}
+.card .ic{font-size:1.8rem}
+.quote{font-style:italic;color:var(--mut)}
+.lead{color:var(--mut);max-width:680px}
+.dark{background:var(--navy);color:#fff}.dark h2{color:var(--teal)}.dark .card{background:#374a60;border-color:#4a5f78;color:#fff}.dark .lead{color:#cdd8e4}
+/* app */
+.app{background:var(--card);border:1px solid var(--line);border-radius:22px;overflow:hidden;box-shadow:0 10px 40px rgba(0,0,0,.08)}
+.tabs{display:flex;overflow-x:auto;background:var(--navy)}
+.tabs button{flex:1;min-width:96px;border:0;background:none;color:#cdd8e4;padding:14px 10px;cursor:pointer;font:600 .9rem Inter;border-bottom:3px solid transparent}
+.tabs button.on{color:var(--teal);border-color:var(--teal);background:#34465b}
+.pane{display:none;padding:22px}.pane.on{display:block}
+input,select,textarea{font:inherit;color:var(--ink);background:var(--bg);border:1px solid var(--line);border-radius:10px;padding:10px 12px;min-width:0}
+.row{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px}.row input{flex:1 1 180px}
+ul.list{list-style:none;padding:0;margin:0}
+.list li{display:flex;align-items:center;gap:10px;padding:10px 12px;border:1px solid var(--line);border-radius:12px;margin-bottom:8px;background:var(--bg)}
+.list li.done span{text-decoration:line-through;opacity:.55}
+.list li span{flex:1}.list .k{font-size:.72rem;background:var(--yel);color:#3a2b00;border-radius:20px;padding:2px 9px;font-weight:700}
+.list button{background:none;border:0;cursor:pointer;font-size:1.1rem;color:var(--mut)}
+input[type=checkbox]{width:20px;height:20px;accent-color:var(--teal)}
+.timer{text-align:center}
+.ring{position:relative;width:240px;height:240px;margin:10px auto}
+.ring svg{transform:rotate(-90deg)}
+.ring .t{position:absolute;inset:0;display:grid;place-content:center;font:900 2.6rem Orbitron;color:var(--ink)}
+.ring .t small{font:600 .85rem Inter;color:var(--mut);text-align:center}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:12px;margin-bottom:20px}
+.stat{background:var(--bg);border-radius:14px;padding:14px;text-align:center}
+.stat b{display:block;font:900 1.6rem Orbitron;color:var(--teald)}.stat span{font-size:.8rem;color:var(--mut)}
+.bars{display:flex;align-items:flex-end;gap:8px;height:140px;padding-top:10px}
+.bars div{flex:1;text-align:center;font-size:.72rem;color:var(--mut);display:flex;flex-direction:column;justify-content:flex-end;height:100%}
+.bars i{display:block;background:linear-gradient(var(--teal),var(--teald));border-radius:6px 6px 0 0;min-height:3px}
+.lvl{height:14px;background:var(--bg);border-radius:20px;overflow:hidden;margin:6px 0 18px}.lvl i{display:block;height:100%;background:var(--yel);width:0;transition:width .5s}
+.badge{text-align:center;opacity:.4;filter:grayscale(1);transition:.3s}.badge.on{opacity:1;filter:none}.badge .ic{font-size:2.2rem}
+.badge p{margin:.2em 0 0;font-size:.8rem;color:var(--mut)}
+.post{padding:12px 14px;border:1px solid var(--line);border-radius:14px;margin-bottom:10px;background:var(--bg)}
+.post b{color:var(--teald)}.post button{border:0;background:none;cursor:pointer;color:var(--coral);font-weight:700}
+.tl{list-style:none;padding:0;margin:0;border-left:3px solid var(--teal)}
+.tl li{padding:8px 0 8px 18px;position:relative;display:flex;gap:14px}.tl li:before{content:"";position:absolute;left:-8px;top:16px;width:13px;height:13px;border-radius:50%;background:var(--coral)}
+.tl time{font-weight:700;min-width:50px;color:var(--teal)}
+.poll button{display:block;width:100%;text-align:left;position:relative;border:1px solid var(--line);background:var(--card);color:var(--ink);border-radius:12px;padding:12px 14px;margin-bottom:8px;cursor:pointer;overflow:hidden;font:inherit}
+.poll button i{position:absolute;inset:0 auto 0 0;background:rgba(0,201,167,.25);width:0;transition:width .5s}
+.poll button span{position:relative;display:flex;justify-content:space-between}
+.team{text-align:center}.av{width:64px;height:64px;border-radius:50%;background:linear-gradient(135deg,var(--teal),var(--coral));color:#fff;display:grid;place-content:center;font:900 1.2rem Orbitron;margin:0 auto 10px}
+.team small{color:var(--mut)}
+footer{background:var(--navy);color:#cdd8e4;text-align:center;padding:36px 20px;font-size:.9rem}
+footer b{font-family:Orbitron;color:var(--teal);font-size:1.2rem}
+#toast{position:fixed;left:50%;bottom:calc(24px + env(safe-area-inset-bottom,0px));transform:translate(-50%,120px);background:var(--navy);color:var(--yel);padding:12px 20px;border-radius:30px;font-weight:700;transition:.4s;z-index:50;border:1px solid var(--teal)}
+#toast.s{transform:translate(-50%,0)}
+.muted{color:var(--mut);font-size:.9rem}
+</style>
+</head>
+<body>
+<nav><div class="wrap">
+<a class="logo" href="#topo">STUDYFLOW</a>
+<ul><li><a href="#sobre">O projeto</a></li><li><a href="#recursos">Recursos</a></li><li><a href="#prototipo">Protótipo</a></li><li><a href="#dia">Um dia</a></li><li><a href="#voce">E você?</a></li><li><a href="#time">Time</a></li></ul>
+<button class="tbtn" id="theme" aria-label="Alternar tema">🌓</button>
+</div></nav>
+
+<header class="hero" id="topo"><div class="wrap">
+<div>
+<small>SOLUÇÕES TECNOLÓGICAS</small>
+<h1>STUDY<br>FLOW</h1>
+<span class="tag">SEU ESTUDO. SEU RITMO. SEU PROGRESSO.</span>
+<p>Um aplicativo para ajudar você a organizar os estudos, manter o foco e acompanhar sua evolução.</p>
+<a class="btn" href="#prototipo">Testar o protótipo</a><a class="btn alt" href="#sobre">Conhecer o projeto</a>
+</div>
+<svg class="robot" viewBox="0 0 200 220" role="img" aria-label="Mascote StudyFlow">
+<ellipse cx="45" cy="38" rx="9" ry="22" fill="#00c9a7" transform="rotate(-15 45 38)"/><ellipse cx="155" cy="38" rx="9" ry="22" fill="#00c9a7" transform="rotate(15 155 38)"/>
+<rect x="30" y="40" width="140" height="100" rx="38" fill="#f1f4f7"/><rect x="45" y="55" width="110" height="70" rx="24" fill="#1c2430"/>
+<ellipse cx="80" cy="90" rx="13" ry="18" fill="#a8f08c"/><ellipse cx="120" cy="90" rx="13" ry="18" fill="#a8f08c"/>
+<circle cx="22" cy="92" r="14" fill="#00c9a7"/><circle cx="178" cy="92" r="14" fill="#00c9a7"/>
+<path d="M55 160q45-30 90 0v40q-45 22-90 0z" fill="#00c9a7"/><circle cx="100" cy="172" r="11" fill="#e9ffd0" stroke="#ffe27a" stroke-width="3"/>
+<path d="M155 150l30-45" stroke="#f1f4f7" stroke-width="16" stroke-linecap="round"/></svg>
+</div></header>
+
+<section id="sobre"><div class="wrap">
+<h2>Estudar é fácil?</h2>
+<div class="grid" style="margin-bottom:28px">
+<div class="card quote">“Tenho muita coisa para estudar.”</div><div class="card quote">“Não sei por onde começar.”</div><div class="card quote">“Vou estudar depois…”</div><div class="card quote">“Comecei a estudar, mas peguei o celular.”</div><div class="card quote">“Quando percebi, já perdi horas.”</div>
+</div>
+<p class="lead"><b>E se você tivesse uma ferramenta para organizar tudo isso?</b> O StudyFlow é um aplicativo pensado para ajudar estudantes a organizar a rotina, manter o foco, acompanhar os estudos, criar motivação e estudar de forma colaborativa. A proposta é apoiar a gestão do tempo, a organização acadêmica e a criação de uma rotina de estudos mais estruturada.</p>
+</div></section>
+
+<section class="dark" id="recursos"><div class="wrap">
+<h2>Principais recursos</h2>
+<div class="grid">
+<div class="card"><div class="ic">📅</div><h3>Tudo no seu lugar</h3><p>Agenda integrada para matérias, tarefas, atividades e metas de estudo. Menos tempo pensando no que fazer, mais tempo fazendo.</p></div>
+<div class="card"><div class="ic">⏱️</div><h3>Foco no que importa</h3><p>Cronômetro baseado na técnica Pomodoro: foco → pausa → foco → pausa.</p></div>
+<div class="card"><div class="ic">📈</div><h3>Você está evoluindo?</h3><p>Acompanhe tempo estudado, tarefas concluídas, metas, pontos e recompensas.</p></div>
+<div class="card"><div class="ic">🏆</div><h3>Gamificação</h3><p>Pontos, conquistas, metas e recompensas como incentivo complementar à continuidade dos estudos.</p></div>
+<div class="card"><div class="ic">🤝</div><h3>Estudo colaborativo</h3><p>Interaja com outros estudantes, compartilhe experiências, troque dicas e acompanhe atividades.</p></div>
+</div></div></section>
+
+<section><div class="wrap">
+<h2>Para quem foi pensado: 3º ano</h2>
+<p class="lead">3º ano = muita coisa acontecendo: provas, trabalhos, ENEM, vestibular e escolhas para o futuro. O StudyFlow ajuda você a transformar <i>“Tenho que estudar.”</i> em <b>“Eu sei o que preciso estudar e por onde começar.”</b></p>
+</div></section>
+
+<section id="prototipo" style="background:var(--bg)"><div class="wrap">
+<h2>Protótipo interativo</h2>
+<p class="lead">Teste as funções do StudyFlow. Seus dados ficam salvos neste navegador.</p>
+<div class="app">
+<div class="tabs" role="tablist">
+<button class="on" data-t="agenda">📅 Agenda</button><button data-t="foco">⏱️ Foco</button><button data-t="prog">📈 Progresso</button><button data-t="conq">🏆 Conquistas</button><button data-t="comu">🤝 Comunidade</button>
+</div>
+
+<div class="pane on" id="agenda">
+<div class="row"><input id="tt" placeholder="Nova tarefa, atividade ou meta..." maxlength="80">
+<select id="ts"><option>Matemática</option><option>Português</option><option>Física</option><option>Química</option><option>Biologia</option><option>História</option><option>Geografia</option><option>Redação</option><option>Outra</option></select>
+<select id="tk"><option>Tarefa</option><option>Atividade</option><option>Meta</option></select>
+<button class="btn sm" id="add">Adicionar</button></div>
+<ul class="list" id="tl"></ul>
+</div>
+
+<div class="pane" id="foco"><div class="timer">
+<div class="row" style="justify-content:center"><select id="mode"><option value="25,5">Pomodoro 25 / 5 min</option><option value="50,10">Longo 50 / 10 min</option><option value="15,3">Curto 15 / 3 min</option><option value="1,1">Demo 1 / 1 min</option></select>
+<select id="ft"><option value="">Estudo livre</option></select></div>
+<div class="ring"><svg width="240" height="240"><circle cx="120" cy="120" r="108" fill="none" stroke="var(--line)" stroke-width="12"/><circle id="arc" cx="120" cy="120" r="108" fill="none" stroke="var(--teal)" stroke-width="12" stroke-linecap="round" stroke-dasharray="678.6" stroke-dashoffset="0"/></svg>
+<div class="t"><span id="clk">25:00</span><small id="ph">FOCO</small></div></div>
+<button class="btn" id="go">Começar</button><button class="btn alt" style="color:var(--ink)" id="rs">Reiniciar</button>
+<p class="muted" id="cy">Ciclos de foco concluídos hoje: 0</p></div></div>
+
+<div class="pane" id="prog">
+<div class="stats" id="st"></div>
+<b id="lv"></b><div class="lvl"><i id="lb"></i></div>
+<b>Minutos estudados nos últimos 7 dias</b><div class="bars" id="bars"></div>
+<p class="muted" style="margin-top:14px">A ideia é visualizar sua própria evolução ao longo da rotina de estudos.</p>
+<button class="btn sm" id="reset" style="background:var(--coral);color:#fff">Zerar meus dados</button>
+</div>
+
+<div class="pane" id="conq"><p class="muted">Cada avanço nos estudos desbloqueia pontos, conquistas e recompensas.</p><div class="grid" id="bd"></div></div>
+
+<div class="pane" id="comu">
+<div class="row"><input id="pn" placeholder="Seu nome" maxlength="20" style="flex:0 1 150px"><input id="pt" placeholder="Compartilhe uma dica ou experiência..." maxlength="140"><button class="btn sm" id="pp">Publicar</button></div>
+<div id="ps"></div></div>
+</div></div></section>
+
+<section class="dark" id="dia"><div class="wrap">
+<h2>Um dia com o StudyFlow</h2>
+<ul class="tl">
+<li><time>08:00</time>📅 Confira suas tarefas</li><li><time>14:00</time>📚 Escolha a matéria</li><li><time>14:05</time>⏱️ Comece o foco</li><li><time>14:30</time>☕ Faça uma pausa</li><li><time>14:35</time>📚 Continue</li><li><time>15:00</time>✅ Conclua a tarefa</li><li><time>15:05</time>🏆 Veja seu progresso</li>
+</ul></div></section>
+
+<section id="voce"><div class="wrap">
+<h2>E você?</h2>
+<p class="lead"><b>O que mais atrapalha seus estudos?</b> Vote e veja o resultado.</p>
+<div class="poll" id="pl" style="max-width:600px"></div>
+<p class="quote">“O que você mudaria em um aplicativo para ele realmente ajudar nos seus estudos?”</p>
+</div></section>
+
+<section style="background:var(--navy);color:#fff;text-align:center"><div class="wrap">
+<h2 style="color:var(--teal)">Estude no seu ritmo.</h2>
+<p>Organize sua rotina. Acompanhe sua evolução.<br><b>Seu foco. Seu progresso. Seu Flow.</b></p>
+<a class="btn" href="#prototipo">Experimentar agora</a></div></section>
+
+<section id="time"><div class="wrap">
+<h2>O time</h2>
+<div class="grid">
+<div class="card team"><div class="av">IA</div><b>Isabelle Amorim Rodrigues</b><br><small>01796342</small></div>
+<div class="card team"><div class="av">ME</div><b>Maria Eduarda Aguiar</b><br><small>01810256</small></div>
+<div class="card team"><div class="av">WF</div><b>Wallacy Ferreira de Oliveira</b><br><small>01810568</small></div>
+<div class="card team"><div class="av">JM</div><b>Joaquim Murilo G. Carvalho Filho</b><br><small>01864911</small></div>
+<div class="card team"><div class="av">RL</div><b>Rodrigo Lucas Ferreira</b><br><small>01811731</small></div>
+<div class="card team"><div class="av">VC</div><b>Vinicius Costa Simões F. Lopes</b><br><small>01796490</small></div>
+</div>
+<p class="muted" style="text-align:center;margin-top:24px">Professor: <b>Elias Arcanjo da Silva Junior</b><br>Atividades Práticas Interdisciplinares de Extensão II (Sistemas de Informação)</p>
+</div></section>
+
+<footer><b>STUDYFLOW</b><br>Soluções Tecnológicas · Seu estudo. Seu ritmo. Seu progresso.</footer>
+<div id="toast"></div>
+
+<script>
+const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
+const K='studyflow_v1';
+const seed={tasks:[{id:1,t:'Revisar funções do 2º grau',s:'Matemática',k:'Tarefa',d:0},{id:2,t:'Redação modelo ENEM',s:'Redação',k:'Atividade',d:0}],min:0,pts:0,cyc:0,log:{},goals:0,votes:[8,6,5,7,4,3],posts:[{n:'Ana',t:'Estudar de manhã e deixar o celular em outro cômodo funcionou pra mim!',l:3},{n:'Lucas',t:'Pomodoro de 25 min + resumo no fim de cada ciclo ajuda muito.',l:5}],voted:-1,mine:0,day:''};
+let S;try{S=JSON.parse(localStorage.getItem(K))||seed}catch(e){S=seed}
+const save=()=>{try{localStorage.setItem(K,JSON.stringify(S))}catch(e){}};
+const today=()=>new Date().toISOString().slice(0,10);
+if(S.day!==today()){S.day=today();S.cyc=0}
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+function toast(m){const t=$('#toast');t.textContent=m;t.classList.add('s');clearTimeout(t._h);t._h=setTimeout(()=>t.classList.remove('s'),2200)}
+function gain(p,m){S.pts+=p;toast('+'+p+' pontos! '+(m||''));save();render()}
+
+// theme
+$('#theme').onclick=()=>{const r=document.documentElement,d=getComputedStyle(r).getPropertyValue('--bg').trim()==='#141c26';r.dataset.theme=d?'light':'dark'};
+
+// tabs
+$$('.tabs button').forEach(b=>b.onclick=()=>{$$('.tabs button').forEach(x=>x.classList.toggle('on',x===b));$$('.pane').forEach(p=>p.classList.toggle('on',p.id===b.dataset.t))});
+
+// agenda
+$('#add').onclick=()=>{const v=$('#tt').value.trim();if(!v)return;S.tasks.unshift({id:Date.now(),t:v,s:$('#ts').value,k:$('#tk').value,d:0});$('#tt').value='';save();render()};
+$('#tt').onkeydown=e=>{if(e.key==='Enter')$('#add').click()};
+function tgl(id){const t=S.tasks.find(x=>x.id==id);t.d=t.d?0:1;if(t.d){if(t.k==='Meta')S.goals++;gain(t.k==='Meta'?50:20,'“'+t.t+'” concluída')}else{if(t.k==='Meta')S.goals=Math.max(0,S.goals-1);save();render()}}
+function del(id){S.tasks=S.tasks.filter(x=>x.id!=id);save();render()}
+
+// timer
+let run=false,ph='f',end=0,left=25*60,tot=25*60,iv;
+const dur=()=>$('#mode').value.split(',').map(n=>+n*60);
+function setPhase(p){ph=p;tot=left=dur()[p==='f'?0:1];draw()}
+function draw(){const m=Math.floor(left/60),s=Math.floor(left%60);$('#clk').textContent=String(m).padStart(2,'0')+':'+String(s).padStart(2,'0');$('#ph').textContent=ph==='f'?'FOCO':'PAUSA ☕';$('#arc').style.stroke=ph==='f'?'var(--teal)':'var(--coral)';$('#arc').setAttribute('stroke-dashoffset',678.6*(1-left/tot));$('#cy').textContent='Ciclos de foco concluídos hoje: '+S.cyc;document.title=run?$('#clk').textContent+' · StudyFlow':'StudyFlow'}
+function tick(){left=Math.max(0,(end-Date.now())/1000);draw();if(left<=0){if(ph==='f'){const m=Math.round(tot/60);S.min+=m;S.cyc++;S.log[today()]=(S.log[today()]||0)+m;gain(m,'Foco concluído! Hora da pausa.');setPhase('p')}else{toast('Pausa finalizada. Bora focar!');setPhase('f')}end=Date.now()+left*1000}}
+$('#go').onclick=()=>{if(run){run=false;clearInterval(iv);$('#go').textContent='Continuar'}else{run=true;end=Date.now()+left*1000;iv=setInterval(tick,300);$('#go').textContent='Pausar'}};
+$('#rs').onclick=()=>{run=false;clearInterval(iv);$('#go').textContent='Começar';setPhase('f')};
+$('#mode').onchange=$('#rs').onclick;
+
+// community
+$('#pp').onclick=()=>{const t=$('#pt').value.trim();if(!t)return;S.posts.unshift({n:$('#pn').value.trim()||'Estudante',t,l:0,me:1});$('#pt').value='';S.mine=1;save();render();toast('Dica publicada!')};
+function like(i){S.posts[i].l++;save();render()}
+$('#reset').onclick=()=>{if(confirm('Zerar todos os dados do protótipo?')){S=JSON.parse(JSON.stringify(seed));S.day=today();save();render()}};
+
+// poll
+const opts=['Falta de tempo','Celular','Cansaço','Não saber por onde começar','Muitas matérias','Falta de motivação'];
+function vote(i){if(S.voted>=0)S.votes[S.voted]--;S.voted=i;S.votes[i]++;save();render()}
+
+const BADGES=[['🚀','Primeiro foco','Conclua 1 ciclo',()=>S.cyc>0||S.min>0],['⏳','Maratonista','Estude 60 minutos',()=>S.min>=60],['🗂️','Organizado','Conclua 3 itens',()=>S.tasks.filter(t=>t.d).length>=3],['🎯','Meta batida','Conclua 1 meta',()=>S.goals>0],['⭐','Nível 3','Alcance 200 pontos',()=>S.pts>=200],['🤝','Colaborador','Publique 1 dica',()=>S.mine>0]];
+
+function render(){
+ $('#tl').innerHTML=S.tasks.length?S.tasks.map(t=>`<li class="${t.d?'done':''}"><input type="checkbox" ${t.d?'checked':''} onchange="tgl(${t.id})" aria-label="Concluir"><span>${esc(t.t)}</span><em class="k">${esc(t.s)} · ${t.k}</em><button onclick="del(${t.id})" aria-label="Excluir">🗑</button></li>`).join(''):'<p class="muted">Nada por aqui. Adicione sua primeira tarefa!</p>';
+ const cur=$('#ft').value;$('#ft').innerHTML='<option value="">Estudo livre</option>'+S.tasks.filter(t=>!t.d).map(t=>`<option>${esc(t.t)}</option>`).join('');$('#ft').value=cur;
+ const dn=S.tasks.filter(t=>t.d).length;
+ $('#st').innerHTML=[[S.min,'min estudados'],[dn,'concluídas'],[S.goals,'metas batidas'],[S.pts,'pontos']].map(a=>`<div class="stat"><b>${a[0]}</b><span>${a[1]}</span></div>`).join('');
+ const lv=Math.floor(S.pts/100)+1;$('#lv').textContent='Nível '+lv+' · '+(S.pts%100)+'/100 pontos';$('#lb').style.width=(S.pts%100)+'%';
+ const days=[...Array(7)].map((_,i)=>{const d=new Date(Date.now()-(6-i)*864e5);return[d.toISOString().slice(0,10),['D','S','T','Q','Q','S','S'][d.getDay()]]});
+ const mx=Math.max(30,...days.map(d=>S.log[d[0]]||0));
+ $('#bars').innerHTML=days.map(d=>{const v=S.log[d[0]]||0;return`<div><span>${v}</span><i style="height:${v/mx*100}%"></i>${d[1]}</div>`}).join('');
+ $('#bd').innerHTML=BADGES.map(b=>`<div class="card badge ${b[3]()?'on':''}"><div class="ic">${b[0]}</div><b>${b[1]}</b><p>${b[2]}</p></div>`).join('');
+ $('#ps').innerHTML=S.posts.map((p,i)=>`<div class="post"><b>${esc(p.n)}</b><br>${esc(p.t)}<br><button onclick="like(${i})">💚 ${p.l}</button></div>`).join('');
+ const tt=S.votes.reduce((a,b)=>a+b,0);
+ $('#pl').innerHTML=opts.map((o,i)=>`<button onclick="vote(${i})"><i style="width:${S.votes[i]/tt*100}%"></i><span><b>${o}${S.voted===i?' ✓':''}</b><span>${Math.round(S.votes[i]/tt*100)}%</span></span></button>`).join('');
+ draw();
+}
+render();
+</script>
+</body>
+</html>
